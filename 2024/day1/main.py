@@ -1,9 +1,4 @@
-def get_data(filename):
-    data = []
-    with open("input.txt", "r") as file:
-        for line in file:
-            data.extend(map(int, line.split()))  # Convert numbers to int and add to list
-    return data
+import os
 
 def part1(data):
     left = []
@@ -41,9 +36,23 @@ def part2(data):
             ans += (val * right[val])
 
     return ans
-    
+
+def parse_input(filename):
+    data = []
+    with open(filename, "r") as file:
+        for line in file:
+            data.extend(map(int, line.split()))  # Convert numbers to int and add to list
+    return data
+
+
+def get_input_file():
+    file_name = "input.txt"
+    script_dir = os.path.dirname(os.path.abspath(__file__))  # Get the script's directory
+    full_file_path = os.path.join(script_dir, file_name)  # Construct the full path
+    return full_file_path
 
 if __name__ == "__main__":
-    input_data = get_data("./input.txt")
-    print("Part 1:", part1(input_data))
-    print("Part 2:", part2(input_data))
+    parsed_input = parse_input(get_input_file())
+
+    print("Part 1:", part1(parsed_input))
+    print("Part 2:", part2(parsed_input))
